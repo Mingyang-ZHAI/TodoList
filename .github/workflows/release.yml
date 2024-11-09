@@ -63,9 +63,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '16.x'
       - name: "🔧 install npm@latest"
-        run: npm i -g npm@8
+        run: npm install -g n
 
       - name: "📦 install dependencies"
         uses: bahmutov/npm-install@v1
