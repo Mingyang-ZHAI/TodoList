@@ -61,6 +61,8 @@ jobs:
           name: docker
           path: /tmp/docker.tar
 
+      - name: List /tmp directory
+        run: ls -l /tmp
 
   build:
     name: Build application
@@ -99,6 +101,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: List /tmp directory
+        run: ls -l /tmp
 
       - name: "📂 download docker artifacts"
         uses: actions/download-artifact@v3
