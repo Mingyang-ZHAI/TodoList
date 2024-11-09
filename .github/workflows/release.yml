@@ -94,7 +94,7 @@ jobs:
           fetch-depth: 0
 
       - name: "📂 download docker artifacts"
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: docker
           path: /tmp
@@ -105,13 +105,13 @@ jobs:
           docker image ls -a
 
       - name: "📂 download build artifacts"
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: build
           path: build
 
       - name: "📂 download diagram artifacts"
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: diagram
           path: .
