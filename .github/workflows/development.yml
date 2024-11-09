@@ -8,7 +8,11 @@ on:
       - synchronize
       - reopened
   workflow_call:
-
+    inputs:
+        example_input:
+          required: false
+          type: string
+          
 jobs:
   test:
     name: Test application
@@ -22,7 +26,7 @@ jobs:
         with:
           node-version: 16
 
-      - name: "🔧 install npm@latest"
+      - name: "🔧 install npm"
         run: npm i -g npm@8
 
       - name: "📦 install dependencies"
@@ -47,7 +51,7 @@ jobs:
         run: npm i -g npm@8
 
       - name: "📦 install dependencies"
-        uses: bahmutov/npm-install@v1
+        uses: npm-install
 
       - name: "🔍 lint code"
         run: npm run lint

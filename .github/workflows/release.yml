@@ -11,7 +11,9 @@ jobs:
   test:
     name: Test and lint
     uses: ./.github/workflows/development.yml
-
+    with:
+      example_input: "Hello World"
+      
   docker:
     name: Build container
     runs-on: ubuntu-latest
