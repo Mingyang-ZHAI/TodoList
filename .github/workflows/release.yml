@@ -48,8 +48,11 @@ jobs:
     #       push: false
     #       cache-from: type=gha, scope=${{ github.workflow }}
     #       cache-to: type=gha, scope=${{ github.workflow }}
-      - name: List files in the directory
-        run: ls -la && mkdir ./Dockerfile
+      - name: Check if Dockerfile exists and create if not
+        run: |
+          if [ ! -f ./Dockerfile ]; then
+              touch Dockerfile
+          fi
 
       - name: Build Docker image
         run: docker buildx build -t my-image -f ./Dockerfile .
