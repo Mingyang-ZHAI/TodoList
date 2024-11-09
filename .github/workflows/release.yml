@@ -11,14 +11,8 @@ jobs:
   test:
     name: Test and lint
     # uses: open-sauced/open-sauced/.github/workflows/development.yml@main
-    runs-on: ubuntu-latest
-    steps:
-      - name: "☁️ checkout repository"
-        uses: actions/checkout@v3
-      - name: Run commands from development.yml
-        run: |
-          cat ./development.yml
-          
+    uses: ./.github/workflows/development.yml
+
   docker:
     name: Build container
     runs-on: ubuntu-latest
