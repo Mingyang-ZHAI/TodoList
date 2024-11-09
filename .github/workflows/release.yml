@@ -48,23 +48,19 @@ jobs:
     #       push: false
     #       cache-from: type=gha, scope=${{ github.workflow }}
     #       cache-to: type=gha, scope=${{ github.workflow }}
-      - name: Check if Dockerfile exists and create if not
+      - name: Create a simple tar file with content
         run: |
-          if [ ! -f ./Dockerfile ]; then
-              echo "FROM alpine" > Dockerfile
-              echo "CMD [\"echo\", \"Hello, Docker!\"]" >> Dockerfile
-          fi
+            mkdir -p /tmp/docker
+            echo "FROM alpine" > /tmp/docker/Dockerfile
+            echo "CMD [\"echo\", \"Hello, Docker!\"]" >> /tmp/docker/Dockerfile
+            tar -cvf /tmp/docker.tar -C /tmp docker
 
-      - name: Build Docker image
-        run: docker buildx build -t my-image -f ./Dockerfile .
-      - name: Save Docker image as tar
-        run: docker save my-image -o /tmp/docker.tar
       - name: Upload Docker artifact
         uses: actions/upload-artifact@v3
         with:
             name: docker
             path: /tmp/docker.tar
-    
+
       - name: "📂 docker artifacts"
         uses: actions/upload-artifact@v4
         with:
