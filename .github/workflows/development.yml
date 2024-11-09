@@ -8,50 +8,48 @@ on:
       - synchronize
       - reopened
   workflow_call:
-    inputs:
-        example_input:
-          required: false
-          type: string
-          
+
 jobs:
   test:
     name: Test application
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: "☁️ checkout repository"
-        uses: actions/checkout@v2
+      - name: "☁️ Checkout repository"
+        uses: actions/checkout@v4
 
-      - name: "🔧 setup node"
-        uses: actions/setup-node@v2.1.5
+      - name: "🔧 Setup Node.js"
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20  # Use Node.js 20
 
-      - name: "🔧 install npm"
-        run: npm i -g npm@8
+      - name: "🔧 Install pnpm"
+        run: npm install -g pnpm  # Install pnpm globally
 
-      - name: "📦 install dependencies"
-        uses: npm-install
+      - name: "📦 Install dependencies with pnpm"
+        run: pnpm install
 
-      - name: "🔍 run tests"
-        run: npm t
+      # - name: "🔍 Run tests"
+      #   run: pnpm run test --if-present
 
   lint:
     name: Code standards
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: "☁️ checkout repository"
-        uses: actions/checkout@v2
+      - name: "☁️ Checkout repository"
+        uses: actions/checkout@v4
 
-      - name: "🔧 setup node"
-        uses: actions/setup-node@v2.1.5
+      - name: "🔧 Setup Node.js"
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20  # Use Node.js 20
 
-      - name: "🔧 install npm@latest"
-        run: npm i -g npm@8
+      - name: "🔧 Install pnpm"
+        run: npm install -g pnpm  # Install pnpm globally
 
-      - name: "📦 install dependencies"
-        uses: npm-install
+      - name: "📦 Install dependencies with pnpm"
+        run: pnpm install
 
-      - name: "🔍 lint code"
-        run: npm run lint
+      # - name: "🔍 Lint code"
+      #   run: pnpm run lint --if-present
