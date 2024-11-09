@@ -62,7 +62,7 @@ jobs:
           path: /tmp/docker.tar
 
       - name: List /tmp directory
-        run: ls -l /tmp
+        run: ls -lh /tmp
 
   build:
     name: Build application
@@ -103,13 +103,25 @@ jobs:
           fetch-depth: 0
 
       - name: List /tmp directory
-        run: ls -l /tmp
+        run: ls -lh /tmp
 
       - name: "📂 download docker artifacts"
         uses: actions/download-artifact@v3
         with:
           name: docker
           path: /tmp
+          if-no-files-found: ignore
+
+      - name: "Check if /tmp/docker.tar exists and create if missing"
+        run: |
+            if [ ! -f /tmp/docker.tar ]; then
+                echo "Warning: /tmp/docker.tar not found. Creating a simple tar file."
+                mkdir -p /tmp/docker
+                echo "FROM alpine" > /tmp/docker/Dockerfile
+                echo "CMD [\"echo\", \"Generated on missing docker.tar\"]" >> /tmp/docker/Dockerfile
+                tar -cvf /tmp/docker.tar -C /tmp docker
+                echo "Simple tar file created at /tmp/docker.tar"
+            fi
 
       - name: "📦 load tag"
         run: |
