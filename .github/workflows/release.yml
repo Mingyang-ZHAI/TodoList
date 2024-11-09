@@ -85,7 +85,7 @@ jobs:
     needs:
       - test
       - docker
-      - build
+    #   - build
     runs-on: ubuntu-latest
     steps:
       - name: "☁️ checkout repository"
@@ -93,11 +93,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: "📂 download docker artifacts"
-        uses: actions/download-artifact@v3
-        with:
-          name: docker
-          path: /tmp
+    #   - name: "📂 download docker artifacts"
+    #     uses: actions/download-artifact@v3
+    #     with:
+    #       name: docker
+    #       path: /tmp
 
       - name: "📦 load tag"
         run: |
