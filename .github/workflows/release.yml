@@ -10,9 +10,7 @@ on:
 jobs:
   test:
     name: Test and lint
-    # uses: open-sauced/open-sauced/.github/workflows/development.yml@main
-    uses: ./.github/workflows/development.yml
-
+    uses: Mingyang096/ELG5301Class8Activity/.github/workflows/development.yml@main
   docker:
     name: Build container
     runs-on: ubuntu-latest
