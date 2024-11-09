@@ -1,8 +1,8 @@
-test for CICD48
+test for CICD
 
 ```
 git add Readme.md
 git add .github/workflows/release.yml
-git commit -m "modify yaml verson48"
+git commit -m "modify yaml verson49"
 git push origin main
 ```

@@ -51,7 +51,8 @@ jobs:
       - name: Check if Dockerfile exists and create if not
         run: |
           if [ ! -f ./Dockerfile ]; then
-              touch Dockerfile
+              echo "FROM alpine" > Dockerfile
+              echo "CMD [\"echo\", \"Hello, Docker!\"]" >> Dockerfile
           fi
 
       - name: Build Docker image
