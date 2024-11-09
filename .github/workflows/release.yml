@@ -49,11 +49,22 @@ jobs:
     #       cache-from: type=gha, scope=${{ github.workflow }}
     #       cache-to: type=gha, scope=${{ github.workflow }}
 
+      - name: Build Docker image
+        run: docker build -t my-image .
+      - name: Save Docker image as tar
+        run: docker save my-image -o /tmp/docker.tar
+      - name: Upload Docker artifact
+        uses: actions/upload-artifact@v3
+        with:
+            name: docker
+            path: /tmp/docker.tar
+    
       - name: "📂 docker artifacts"
         uses: actions/upload-artifact@v4
         with:
           name: docker
           path: /tmp/docker.tar
+          
 
   build:
     name: Build application
