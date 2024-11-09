@@ -52,7 +52,7 @@ jobs:
         run: ls -la && mkdir ./Dockerfile
 
       - name: Build Docker image
-        run: docker build -t my-image -f ./Dockerfile
+        run: docker buildx build -t my-image -f ./Dockerfile .
       - name: Save Docker image as tar
         run: docker save my-image -o /tmp/docker.tar
       - name: Upload Docker artifact
