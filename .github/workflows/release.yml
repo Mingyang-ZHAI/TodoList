@@ -37,17 +37,17 @@ jobs:
           images: ${{ github.repository }}
           tags: latest
 
-      - name: "📦 docker build"
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=docker,dest=/tmp/docker.tar
-          push: false
-          cache-from: type=gha, scope=${{ github.workflow }}
-          cache-to: type=gha, scope=${{ github.workflow }}
+    #   - name: "📦 docker build"
+    #     uses: docker/build-push-action@v2
+    #     with:
+    #       context: .
+    #       file: ./Dockerfile
+    #       tags: ${{ steps.meta.outputs.tags }}
+    #       labels: ${{ steps.meta.outputs.labels }}
+    #       outputs: type=docker,dest=/tmp/docker.tar
+    #       push: false
+    #       cache-from: type=gha, scope=${{ github.workflow }}
+    #       cache-to: type=gha, scope=${{ github.workflow }}
 
       - name: "📂 docker artifacts"
         uses: actions/upload-artifact@v4
@@ -78,7 +78,7 @@ jobs:
           excluded_paths: "node_modules,build,.storybook,.netlify,.github,npm-shrinkwrap.json"
           output_file: "public/diagram.svg"
           should_push: false
-          root_path: "src/"
+        #   root_path: "src/"
           artifact_name: "diagram"
 
       - name: "🚀 static app"
