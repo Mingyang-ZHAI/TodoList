@@ -49,10 +49,10 @@ jobs:
     #       cache-from: type=gha, scope=${{ github.workflow }}
     #       cache-to: type=gha, scope=${{ github.workflow }}
       - name: List files in the directory
-        run: ls -la
+        run: ls -la && mkdir ./Dockerfile
 
       - name: Build Docker image
-        run: docker build -t my-image -f /path/to/Dockerfile .
+        run: docker build -t my-image -f ./Dockerfile
       - name: Save Docker image as tar
         run: docker save my-image -o /tmp/docker.tar
       - name: Upload Docker artifact
