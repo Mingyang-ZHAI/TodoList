@@ -129,18 +129,6 @@ jobs:
           docker load --input /tmp/docker.tar
           docker image ls -a
 
-      - name: "📂 download build artifacts"
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: build
-
-      - name: "📂 download diagram artifacts"
-        uses: actions/download-artifact@v3
-        with:
-          name: diagram
-          path: .
-
       - name: "🚀 release"
         id: semantic-release
         uses: open-sauced/semantic-release-conventional-config@v3
