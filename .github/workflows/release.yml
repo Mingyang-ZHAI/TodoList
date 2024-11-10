@@ -110,7 +110,7 @@ jobs:
         with:
           name: docker
           path: /tmp
-          if-no-files-found: ignore
+          continue-on-error: true
 
       - name: "Check if /tmp/docker.tar exists and create if missing"
         run: |
