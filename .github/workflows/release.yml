@@ -116,12 +116,12 @@ jobs:
         run: |
             if [ ! -f /tmp/docker.tar ]; then
                 echo "Warning: /tmp/docker.tar not found. Building and saving a simple Docker image."
-                docker build -t my-simple-image - <<EOF
-                FROM alpine
-                CMD ["echo", "Generated on missing docker.tar"]
-                EOF
+                echo "FROM alpine" > Dockerfile
+                echo 'CMD ["echo", "Generated on missing docker.tar"]' >> Dockerfile
+                docker build -t my-simple-image -f Dockerfile .
                 docker save my-simple-image -o /tmp/docker.tar
                 echo "Simple Docker image saved to /tmp/docker.tar"
+                rm Dockerfile # Clean up the temporary Dockerfile
             fi
 
       - name: "📦 load tag"
