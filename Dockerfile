@@ -6,8 +6,11 @@ WORKDIR /app
 
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies with pip retry logic and cleanup
+RUN pip install --upgrade pip && \
+    python -m pip install --no-cache-dir -r requirements.txt --use-feature=2020-resolver || \
+    python -m pip install --no-cache-dir -r requirements.txt --no-deps
+
 
 # Copy the application code
 COPY . .
