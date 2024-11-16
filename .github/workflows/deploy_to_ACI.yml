@@ -25,6 +25,6 @@ jobs:
           memory: 1.5
           ports: 80
       - name: 'Debug Variables'
-          run: |
+        run: |
             echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
             echo "AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}"

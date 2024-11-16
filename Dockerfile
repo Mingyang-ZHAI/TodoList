@@ -4,13 +4,9 @@ FROM python:3.9
 # Set the working directory
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
-COPY requirements.txt .
-# Install dependencies with pip retry logic and cleanup
+# Install dependencies directly (list your dependencies here)
 RUN pip install --upgrade pip && \
-    python -m pip install --no-cache-dir -r requirements.txt --use-feature=2020-resolver || \
-    python -m pip install --no-cache-dir -r requirements.txt --no-deps
-
+    pip install fastapi uvicorn  # Replace these with your actual dependencies
 
 # Copy the application code
 COPY . .
