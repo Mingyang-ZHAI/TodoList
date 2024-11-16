@@ -1,0 +1,25 @@
+name: Deploy to ACI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Login to Azure'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+          resource-group: <your-resource-group>
+          dns-name-label: myappdeployment
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/app:latest
+          location: 'eastus'
+          cpu: 1
+          memory: 1.5
+          ports: 80
