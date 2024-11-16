@@ -19,7 +19,7 @@ jobs:
       # New step to check the working directory
       - name: 'Display current directory'
         run: pwd
-        
+
       # New step to list files in the root directory
       - name: 'List files in the root directory'
         run: ls -al
@@ -27,6 +27,9 @@ jobs:
       # New step to list files in subdirectories if any
       - name: 'List files recursively'
         run: find . -type f
+      - name: 'Print Registry Login Server'
+        run: |
+           echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
 
       - name: 'Build and push image'
         run: |
