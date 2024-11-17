@@ -1,0 +1,47 @@
+name: Deploy to ACI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Login to Azure'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Authenticate Docker with ACR
+        run: az acr login --name registryzmy
+
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+          name: myappdeployment
+          resource-group: resource_group1
+          dns-name-label: myappdeployment
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/app:latest
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          location: canadacentral
+          cpu: 1
+          memory: 1.5
+          ports: 3000
+
+          with:
+            resource-group: 5300
+            name: 5300week10
+            dns-name-label: myappdeployment
+            image: ***/app:latest
+            registry-username: ***
+            registry-password: ***
+            location: canadacentral
+            ports: 3000
+            cpu: 1
+            memory: 1.5
+            ip-address: Public
+            os-type: Linux
+            protocol: TCP
+            restart-policy: Always
