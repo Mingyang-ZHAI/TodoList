@@ -27,10 +27,14 @@ jobs:
       # New step to list files in subdirectories if any
       - name: 'List files recursively'
         run: find . -type f
+
       - name: 'Print Registry Login Server'
         run: |
            echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
-
+                    
+      - name: Authenticate Docker with ACR
+        run: az acr login --name registryzmy
+        
       - name: 'Build and push image'
         run: |
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/app:latest

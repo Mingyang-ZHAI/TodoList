@@ -12,11 +12,9 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-      - name: 'Debug Variables'
-        run: |
-          echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
-          echo "AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}"
+
+      - name: Authenticate Docker with ACR
+        run: az acr login --name registryzmy
 
       - name: 'Deploy to Azure Container Instances'
         uses: 'azure/aci-deploy@v1'
@@ -25,6 +23,8 @@ jobs:
           resource-group: resource_group1
           dns-name-label: myappdeployment
           image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/app:latest
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           location: 'eastus'
           cpu: 1
           memory: 1.5
