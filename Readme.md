@@ -1,8 +1,14 @@
-test for CICD
+# TODO LIST
+
+**Note**: This repository is a migration from the original repository at [https://github.com/Mingyang096/ELG5301Class8Activity](https://github.com/Mingyang096/ELG5301Class8Activity). If you were following the previous repository, please consider starring this one to stay updated!
+
+
+
+## test for CICD
 test for Automating Docker Deployments to Azure with GitHub Actions
 
 
-Your App has been deployed at: 
+The App has been deployed at: 
 http://myappdeployment.canadacentral.azurecontainer.io:3000/
 
 How to solve:
